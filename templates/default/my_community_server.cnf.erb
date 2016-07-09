@@ -1,0 +1,59 @@
+[client]
+port            = 3306
+socket          = /var/lib/mysql/mysql.sock
+
+
+[mysqld]
+user = mysql
+datadir = /var/lib/mysql
+tmpdir = /tmp
+socket = /var/lib/mysql/mysql.sock
+port = 3306
+character-set-server = <%= node['mysql']['character-set'] %>
+collation-server = <%= node['mysql']['character-set'] %>_general_ci
+max_connections = 2000
+max_allowed_packet = 16M
+general-log = 0
+general-log-file = query.log
+#slow_query_log
+long_query_time = 2
+slow_query_log_file = slow.log
+
+
+innodb_data_home_dir = /var/lib/mysql
+innodb_data_file_path = ibdata1:100M:autoextend
+innodb_buffer_pool_size = 1024M
+innodb_log_file_size = 64M
+innodb_file_per_table = 1
+innodb_file_format = Barracuda
+innodb_log_buffer_size = 64M
+innodb_flush_log_at_trx_commit = 1
+thread_cache_size = 200
+
+
+server-id = <%= node['mysql']['repl']['server-id'] %>
+expire_logs_days = 7
+#auto_increment_offset = 1
+#auto_increment_increment = 1
+log-bin = mysql-bin
+max_binlog_size = 1G
+binlog_format = MIXED
+#log_slave_updates
+#rpl_semi_sync_master_enabled = 1
+#rpl_semi_sync_master_timeout = 1000
+#rpl_semi_sync_slave_enabled = 1
+#plugin-load=rpl_semi_sync_master=semisync_master.so
+#plugin-load=rpl_semi_sync_slave=semisync_slave.so
+
+
+[mysqld_safe]
+log-error = /var/log/mysqld.log
+
+
+[mysqldump]
+default-character-set = <%= node['mysql']['character-set'] %>
+
+
+[mysql]
+default-character-set = <%= node['mysql']['character-set'] %>
+

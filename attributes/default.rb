@@ -1,0 +1,11 @@
+default['mysql']['version']['major'] = "5.6"
+default['mysql']['version']['minor'] = "20"
+default['mysql']['version']['platform'] = "el6"
+default['mysql']['log_rotate'] = "31"
+default['mysql']['root_password'] = nil
+default['mysql']['repl']['server-id'] = "1"
+default['mysql']['character-set'] = "utf8"
+default['mysql']['community']['install_flavor'] = "yum"
+default['mysql']['community']['version'] = "#{node['mysql']['version']['major']}.#{node['mysql']['version']['minor']}"
+default['mysql']['community']['repo'] = "mysql-community-release-el6-5.noarch.rpm"
+default['mysql']['community']['url'] = "https://localhost/"
